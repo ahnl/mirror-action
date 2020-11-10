@@ -63,7 +63,7 @@ fi
 
 
 git remote add mirror "${REMOTE}"
-git update-index --assume-unchanged CNAME
+git filter-branch --index-filter 'git rm --cached --ignore-unmatch CNAME' HEAD
 if [[ "${INPUT_PUSH_ALL_REFS}" != "false" ]]; then
     eval git push ${GIT_PUSH_ARGS} mirror "\"refs/remotes/origin/*:refs/heads/*\""
 else
